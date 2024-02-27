@@ -8,5 +8,5 @@ for(let i = 0; i < elements.length; i++){
    
    //elements[i].style.backgroundImage = 'url(' + src + ')';
    elements[i].style.backgroundImage = `url(${src})`;
-   console.dir(elements[i])
+   //console.dir(elements[i])
 }

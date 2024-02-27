@@ -3,7 +3,7 @@ const modal = document.querySelector('.search-model');
 const modalBtn = document.querySelector('.icon_search');
 const closeBtn = modal.querySelector('.search-close-switch');
 const searchInput = document.getElementById('search-input');
-console.log(searchInput)
+
 
 
 

@@ -13,7 +13,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" /> <!-- для swiper стили -->
+                                
     <!-- Css Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
@@ -23,6 +24,7 @@
     <script src="./js/bg-elements.js" defer></script>
     <script src="./js/modal.js" defer></script>
     <script src="./js/scrollToTop.js" defer></script>
+    <script src="./js/slider.js" defer></script>
 </head>
 
 <body>
@@ -74,7 +76,7 @@
             <div class="hero-box">
                 <div class="hero__slider swiper">
                     <div class="swiper-wrapper">
-                        <div class="hero__items swiper-slide set-bg" data-setbg="img/hero/hero-1.jpg">
+                        <div class="hero__items swiper-slide set-bg" data-setbg="img/hero/hero-1.jpg"> <!--1ый слайд -->
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="hero__text">
@@ -85,7 +87,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="hero__items swiper-slide set-bg" data-setbg="img/hero/hero-2.jpg">
+                        <div class="hero__items swiper-slide set-bg" data-setbg="img/hero/hero-2.jpg"><!--2ый слайд -->
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="hero__text">
@@ -96,7 +98,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="hero__items swiper-slide set-bg" data-setbg="img/hero/hero-3.jpg">
+                        <div class="hero__items swiper-slide set-bg" data-setbg="img/hero/hero-3.jpg"><!--3ый слайд -->
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="hero__text">
@@ -638,7 +640,9 @@
 
 
     <!-- Js Plugins: -->
-    <script src="https://cdn.jsdelivr.net/npm/seamless-scroll-polyfill@latest"></script>  <!-- библиотека для плавного скролла https://www.npmjs.com/package/seamless-scroll-polyfill, скрипт загрузиться до того как используется в scrollToTop.js -->
+    <script src="https://cdn.jsdelivr.net/npm/seamless-scroll-polyfill@latest"></script>  <!-- библиотека для плавного скролла https://www.npmjs.com/package/seamless-scroll-polyfill, скрипт загрузиться до того как он будет используется в scrollToTop.js -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+                
 </body>
 
 </html>
