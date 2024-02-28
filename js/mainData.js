@@ -2,6 +2,68 @@ const mainData = () => {
 
    const renderAnimeList = (array, ganres) => {  // 6 жанров
 
+      const wrapper = document.querySelector('.product .col-lg-8');
+      wrapper.innerHTML = '';
+
+
+      ganres.forEach((ganre) => {      // ganres = {'Приключения', 'Фэнтези', 'Истия', 'Сенен', 'Детектив', ''}
+        const productBlock = document.createElement('div');
+        const listBlock = document.createElement('div');
+        listBlock.classList.add('row');
+
+
+         productBlock.insertAdjacentHTML('afterbegin', `
+            <div class="row">
+               <div class="col-lg-8 col-md-8 col-sm-8">
+                  <div class="section-title">
+                     <h4> ${ganre} </h4>
+                  </div>
+               </div>
+               <div class="col-lg-4 col-md-4 col-sm-4">
+                  <div class="btn__all">
+                     <a href="/categories.html" class="primary-btn">View All <span class="arrow_right"></span></a>
+                  </div>
+               </div>
+            </div>        
+         `);
+
+         productBlock.classList.add('mb-5')
+
+         const filterArray = array.filter((item) => {
+            return item.ganre === ganre;
+         })
+
+         filterArray.forEach((item)=>{
+            console.log(item)
+            listBlock.insertAdjacentHTML('afterbegin', `
+               <div class="col-lg-4 col-md-6 col-sm-6">
+                  <div class="product__item">
+                     <div class="product__item__pic set-bg" data-setbg="${item.image}">
+                        <div class="ep"> ${item.rating} / 10 </div>
+                        <div class="view"><i class="fa fa-eye"></i> ${item.views} </div>
+                     </div>
+                     <div class="product__item__text">
+                        <ul>
+                           ${item.tags}.forEach((tag)=>{
+                              const li = document.createElement('li');
+                              li.textContent = tag;
+                           })
+                        </ul>
+                        <h5><a href="/anime-details.html"> ${item.title} </a></h5>
+                     </div>
+                  </div>
+               </div>
+            `);
+         })
+       
+         productBlock.append(listBlock);
+         wrapper.append(productBlock);
+
+         wrapper.querySelectorAll('.set-bg').forEach((elem) => {
+   
+            elem.style.backgroundImage = `url(${elem.dataset.setbg})`;
+         });
+      })
 
    }
 
@@ -25,8 +87,6 @@ const mainData = () => {
          );
       });
 
-
-      
 
       wrapper.querySelectorAll('.set-bg').forEach((elem) => {
    
