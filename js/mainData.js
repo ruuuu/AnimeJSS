@@ -1,7 +1,8 @@
 const mainData = () => {
 
   // всатвить урл из firebase
-   fetch('./db.json')
+  //     ./db.json
+   fetch('https://anime-d6a5d-default-rtdb.firebaseio.com/')
       .then((response) => { // когда данные с сервера вернуться, запуститься then()-асинхронный
          //console.log(response)
 
