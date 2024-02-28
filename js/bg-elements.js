@@ -1,14 +1,14 @@
 const bgElements = () => {
 
-   // const elements = document.querySelectorAll('.set-bg');
+   const elements = document.querySelectorAll('.set-bg');
 
 
   
-   // elements.forEach((item) => {
+   elements.forEach((item) => {
 
-   //    const src = item.dataset.setbg; 
-   //    item.style.backgroundImage = `url(${src})`;
-   // });
+      const src = item.dataset.setbg; 
+      item.style.backgroundImage = `url(${src})`;
+   });
 
 
   
