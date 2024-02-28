@@ -37,19 +37,24 @@ const mainData = () => {
 
  
 
-  //     ./db.json
-   fetch('https://animejs-5b7c7-default-rtdb.firebaseio.com/db.json')    // всатвить урл из firebase
+  //      https://animejs-5b7c7-default-rtdb.firebaseio.com/db.json
+   fetch('./db.json')    
       .then((response) => { // когда данные с сервера вернуться, запуститься then()-асинхронный
          return response.json();
       })
       .then((data) => {   // data - response.json()
 
-         const ganres = new Set();  // коллекция, хранит уникальные значения
+         const ganres = new Set();  // коллекция {}, хранит уникальные значения
+         data.db.forEach((item) => {
+            ganres.add(item.ganre);   
+         });
+         // ganres = {'Приключения', 'Фэнтези', 'Истия', 'Сенен', 'Детектив', ''}
+
+         renderAnimeList(data.db, ganres);
 
 
-
-
-         const sortArray = data.sort((a, b) => { // сортировка по убыванию
+         
+         const sortArray = data.db.sort((a, b) => { // сортировка по убыванию
             return b.views - a.views;
          });
 
