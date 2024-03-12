@@ -1,3 +1,4 @@
+// отрисовка кртчоек аниме по категориям
 const categoriesData = () => {
 
    //отрисовка категрий в верхнем меню:
@@ -19,17 +20,17 @@ const categoriesData = () => {
 
 
    // отрисовка карточек:
-   const renderAnimeList = (array, ganres) => {  // 6 жанров
+   const renderAnimeList = (array, ganres) => {   // ganres = {'Приключения', 'Фэнтези', 'Истия', 'Сенен', 'Детектив'}
 
       const wrapper = document.querySelector('.product-page .col-lg-8');
       //wrapper.innerHTML = '';
 
 
-      ganres.forEach((ganre) => {      // ganres = {'Приключения', 'Фэнтези', 'Истия', 'Сенен', 'Детектив'}
-        const productBlock = document.createElement('div');
-        const listBlock = document.createElement('div');
-        listBlock.classList.add('row');
-
+      ganres.forEach((ganre) => { 
+         const productBlock = document.createElement('div');
+         const listBlock = document.createElement('div');
+         listBlock.classList.add('row');
+         productBlock.classList.add('mb-5')  // mb-5 (margin-bottom: 5px) класс бутстрапа
 
          productBlock.insertAdjacentHTML('beforeend', `
             <div class="row">
@@ -46,10 +47,10 @@ const categoriesData = () => {
             </div>        
          `);
 
-         productBlock.classList.add('mb-5')  // mb-5 (margin-bottom: 5px) класс бутстрапа
+       
 
-         const filterArray = array.filter((item) => {  // вернет новый массив карточек []
-            return item.ganre === ganre;
+         const filterArray = array.filter((item) => {  // вернет новый массив карточек, элментыам масива будут те корые подходят под условие, с определенной категорией
+            return item.tags.includes(ganre);
          });
 
          //console.log('filterArray ', filterArray)
@@ -64,7 +65,7 @@ const categoriesData = () => {
                `);
             });
 
-            console.log(tagsBlock)
+            
 
             listBlock.insertAdjacentHTML('beforeend', `
                <div class="col-lg-4 col-md-6 col-sm-6">
@@ -95,7 +96,7 @@ const categoriesData = () => {
 
 
 
-   // отрисовка карточек в sidebar:
+   // отрисовка карточек в sidebar(правая часть):
    const renderTopAnime = (array) => {
 
       const wrapper = document.querySelector('.filter__gallery');
@@ -116,7 +117,7 @@ const categoriesData = () => {
 
       wrapper.querySelectorAll('.set-bg').forEach((elem) => {
    
-         elem.style.backgroundImage = `url(${elem.dataset.setbg})`;
+         elem.style.backgroundImage = `url(${elem.dataset.setbg})`;  // значение дата-атрибута data-setbg
       });
 
    }
@@ -126,34 +127,37 @@ const categoriesData = () => {
    //  ./db.json
    //      https://animejs-5b7c7-default-rtdb.firebaseio.com/db.json
    fetch('./db.json')    
-      .then((response) => { // когда данные с сервера вернуться, запуститься then()-асинхронный
+      .then((response) => { // когда данные с сервера вернуться, запуститься then()-асинхронный метод
          return response.json();
       })
       .then((data) => {   // data - response.json()
          
          const ganres = new Set();  // коллекция {}, хранит уникальные значения
          
-         //console.log(window.location.search)  // ?ganre = %lkjghg%
-         const genreParams = new URLSearchParams(window.location.search).get('ganre');    // извлекаем search параметр из урла
+         //console.log(window.location.search)  // ?ganre = %lkjglkjghglkjghglkjghghg%
+         const genreParams = new URLSearchParams(window.location.search).get('ganre');    // извлекаем search параметр ganre из урла
 
          
-
-
-
          //data.db
-         data.anime.forEach((item) => {
-            ganres.add(item.ganre);   
+         data.anime.forEach((item) => {    // ganres = {'Приключения', 'Фэнтези', 'Истия', 'Сенен', 'Детектив', ''}
+            ganres.add(item.ganre);   // добавляем данные в коллекцию ganres
          });
-         // ganres = {'Приключения', 'Фэнтези', 'Истия', 'Сенен', 'Детектив', ''}
+        
 
          //                data.db
          const sortArray = data.anime.sort((a, b) => { // сортировка по убыванию
             return b.views - a.views;
          });
-         //              data
-         renderAnimeList(data.anime, ganres);
-         renderTopAnime(sortArray.slice(0, 5));  // slice(startIndex, endIndex) вырезает часть массива
-         renderGanreList(ganres); // отрисовка меню категроий
+        
+         renderTopAnime(sortArray.slice(0, 5));  // slice(startIndex, endIndex) вырезает часть массива, начиная с элемента  у котрого индекс startIndex по endIndex(не вклчая) 
+         if(genreParams){
+            renderAnimeList(data.anime, [genreParams]);
+         }
+         else{
+            //              data
+            renderAnimeList(data.anime, ganres);
+         }
+         renderGanreList(ganres);            // отрисовка меню категроий(вверху)
          
       });
 
