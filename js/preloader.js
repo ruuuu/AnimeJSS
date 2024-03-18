@@ -12,4 +12,4 @@ const preloader = () => {
 }
 
 
-preloader();
+//preloader();

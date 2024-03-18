@@ -1,5 +1,8 @@
-// страница самог аниме
+// страница самого аниме
 const detailData = () => {
+
+   const preloder = document.querySelector('.preloder');  //вклюаем прелоадер
+   
 
    //отрисовка категрий в верхнем меню:
    const renderGanreList = (ganres) => {
@@ -30,20 +33,45 @@ const detailData = () => {
       const imageBlock = document.querySelector('.anime__details__pic');
       const viewsBlock = imageBlock.querySelector('.view');
       // anime__details__title
-      const titleBlock = document.querySelector('.anime__details__title');
-      const subTitleBlock = document.querySelector('.anime__details__title');
+      const titleBlock = document.querySelector('.anime__details__title h3');
+      const subTitleBlock = document.querySelector('.anime__details__title span');
+      const descriptionBlock = document.querySelector('.anime__details__text p');
+      const widgetList = document.querySelectorAll('.anime__details__widget ul li');
+      const breadcrumb = document.querySelector('.breadcrumb__links span');
 
-      viewsBlock.innerHTML = '';
-      viewsBlock.insertAdjacentHTML('beforeend', `<i class="fa fa-eye"></i> ${animeObj.views}`);
 
-     
       if(animeObj){
          imageBlock.dataset.setbg = animeObj.image;  // задаем значение дата-атрибуту data-setbg
+
+         viewsBlock.innerHTML = '';
+         viewsBlock.insertAdjacentHTML('beforeend', `<i class="fa fa-eye"></i> ${animeObj.views}`);
+
+         titleBlock.textContent = animeObj.title;
+         subTitleBlock.textContent = animeObj['original-title'];  // тк составное свойсвто поэтому берем  в квадратные скобки
+         descriptionBlock.textContent = animeObj.description;
+
+         widgetList[0].insertAdjacentHTML('beforeend', `
+            <span>Date aired:</span> ${animeObj.date}
+         `);
+         widgetList[1].insertAdjacentHTML('beforeend', `
+            <span>Rating:</span> ${animeObj.rating}
+         `);
+         widgetList[2].insertAdjacentHTML('beforeend', `
+            <span>Genre:</span> ${animeObj.tags.join(", ")}  <!-- получаем строку из массива элементво разделенные запятой и пробелом ->
+         `);
+
+         breadcrumb.textContent = animeObj.ganre;
 
          document.querySelectorAll('.set-bg').forEach((elem) => {
    
             elem.style.backgroundImage = `url(${imageBlock.dataset.setbg})`;
          });
+
+         setTimeout(() => { // отклюаем прелоадер
+            preloder.classList.remove('active');
+         }, 500)  // через 500 мс запустится коллбэк-фукнция
+      
+
       }
       else{
          console.log('Аниме отсутствует')
@@ -52,12 +80,7 @@ const detailData = () => {
    }
 
 
-
-  
-
- 
-
-   //  ./db.json
+   
    //      https://animejs-5b7c7-default-rtdb.firebaseio.com/db.json
    fetch('./db.json')    
       .then((response) => { // когда данные с сервера вернуться, запуститься then()-асинхронный метод
@@ -71,16 +94,7 @@ const detailData = () => {
          const genreParams = new URLSearchParams(window.location.search).get('itemId');    // извлекаем search параметр itemId из урла
 
          
-         //data.db
-         // data.anime.forEach((item) => {    // ganres = {'Приключения', 'Фэнтези', 'Истия', 'Сенен', 'Детектив', ''}
-         //    ganres.add(item.ganre);   
-         // });
         
-
-         // //                data.db
-         // const sortArray = data.anime.sort((a, b) => { // сортировка по убыванию
-         //    return b.views - a.views;
-         // });
         
          if(genreParams){
             renderAnimeDetails(data.anime, genreParams);
@@ -91,8 +105,6 @@ const detailData = () => {
          renderGanreList(ganres);            // отрисовка меню категроий(вверху)
          
       });
-
-
 
 }
 

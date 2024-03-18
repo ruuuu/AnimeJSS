@@ -1,6 +1,8 @@
 // отрисовка кртчоек аниме по категориям
 const categoriesData = () => {
 
+   const preloder = document.querySelector('.preloder');  //вклюаем прелоадер
+
    //отрисовка категрий в верхнем меню:
    const renderGanreList = (ganres) => {
       const dropdown = document.querySelector('.header__menu .dropdown');  // ul
@@ -92,6 +94,10 @@ const categoriesData = () => {
          });
       })
 
+      setTimeout(() => {
+         preloder.classList.remove('active');
+      }, 500)  // через 500 мс запустится коллбэк-фукнция
+
    }
 
 
@@ -124,7 +130,7 @@ const categoriesData = () => {
 
  
 
-   //  ./db.json
+ 
    //      https://animejs-5b7c7-default-rtdb.firebaseio.com/db.json
    fetch('./db.json')    
       .then((response) => { // когда данные с сервера вернуться, запуститься then()-асинхронный метод
