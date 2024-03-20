@@ -4,7 +4,7 @@ const detailData = () => {
    const preloder = document.querySelector('.preloder');  //вклюаем прелоадер
    
 
-   //отрисовка категрий в верхнем меню:
+   // отрисовка категрий в верхнем меню:
    const renderGanreList = (ganres) => {
       const dropdown = document.querySelector('.header__menu .dropdown');  // ul
       dropdown.textContent = '';
@@ -70,8 +70,6 @@ const detailData = () => {
          setTimeout(() => { // отклюаем прелоадер
             preloder.classList.remove('active');
          }, 500)  // через 500 мс запустится коллбэк-фукнция
-      
-
       }
       else{
          console.log('Аниме отсутствует')
@@ -87,12 +85,12 @@ const detailData = () => {
          return response.json();
       })
       .then((data) => {   // data - response.json()
-         
+         console.log('data ', data)
          const ganres = new Set();  // коллекция {}, хранит уникальные значения
          
          //console.log(window.location.search)  // ?itemId = %lkjglkjghglkjghglkjghghg%
          const genreParams = new URLSearchParams(window.location.search).get('itemId');    // извлекаем search параметр itemId из урла
-
+         console.log('genreParams ', genreParams)
          
         
         
@@ -105,7 +103,6 @@ const detailData = () => {
          renderGanreList(ganres);            // отрисовка меню категроий(вверху)
          
       });
-
 }
 
 

@@ -11,13 +11,13 @@ const modal = () => {
 
 
    modalBtn.addEventListener('click', () => {
-      modal.style.display = 'block';
+      modal.classList.add('active');
    });
 
 
 
    closeBtn.addEventListener('click', () => {
-      modal.style.display = 'none';
+      modal.classList.remove('active');
    });
 
 
@@ -25,6 +25,6 @@ const modal = () => {
    searchInput.addEventListener('input', () => {
       console.log(searchInput.value);
    });
-
-
 }
+
+modal();

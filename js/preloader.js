@@ -1,15 +1,15 @@
-const preloader = () => {
+// const preloader = () => {
 
-   const preloder = document.querySelector('.preloder');
+//    const preloder = document.querySelector('.preloder');
 
-   preloder.classList.add('active');
+//    preloder.classList.add('active');
 
 
-   setTimeout(() => {
-      preloder.classList.remove('active');
-   }, 500)  // через 500 мс запустится коллбэк-фукнция
+//    setTimeout(() => {
+//       preloder.classList.remove('active');
+//    }, 500)  // через 500 мс запустится коллбэк-фукнция
 
-}
+// }
 
 
 //preloader();
